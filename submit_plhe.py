@@ -85,7 +85,7 @@ class job(object):
                                                         seed = self.seed),
             "mv cmsgrid_final.lhe ../",
             "cd ../",
-            "# Now remove the temporary folder"
+            "# Now remove the temporary folder",
             "rm -rf temp_folder",
             "cd $here"
         ]
