@@ -1,33 +1,9 @@
 # ttx-production
 Configs and code to produce private LHE for Run3 ttX
 
-## Install code
-This automatically installs all the code needed to run mg5_aMC@NLO (3.3.X).
-```
-./makeit.sh
-```
+# Generate pLHE from a gridpack
+With the following command:
 
-## Generate events
-Choose a card from the cards file and execute.
-```
-cp cards/$PROCESS/* .
-source configure.sh # To activate python3.9
-mg5_aMC proc_card.dat
-```
+```python3 submit_plhe.py --nevents $NEVENTS --gridpack  $PATH_TO_GRIDPACK/gridpack_ttw.tar.xz --outpath $OUTPUT_PATH/ttlnu-1jet_newFxFx 352642 --mode slurm ```
 
-This will take it's time to compile all the directories, once it is done, copy the remaining cards (run_card, proc_card, param_card and madspin_card into the created directory). For example for ttW the workflow would be:
-
-```
-cp cards/TTWJetsToLNu_5f_fxfx/* .
-source configure.sh # To activate python3.9
-mg5_aMC proc_card.dat
-
-cp *dat TTWJetsToLNu_5f_fxfx/Cards/
-cd TTWJetsToLNu_5f_fxfx
-
-# Now generate events up to parton level
-python3 bin/generate_events.py -p 
-```
-
-
-
+That will create $NEVENTS/2000 folders in the output directory, each job will generate 2000 events itself. After producing the events the folder will be removed and we'll only keep the LHE. The fact that this produces batches of 2000 events is so far hardcoded.
