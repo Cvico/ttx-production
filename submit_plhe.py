@@ -1,5 +1,7 @@
 """
-Script to generate LHE from a CMS gridpack 
+Script to generate LHE from a CMS gridpack
+--------------------------------------------------
+author: Carlos Vico (carlos.vico.villalba@cern.ch)
 """
 
 import os
