@@ -1,0 +1,21 @@
+{
+	"analysis" : "ttlnu",
+	"lhe-files" : [
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job0/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job1/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job2/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job3/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job4/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job5/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job6/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job7/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job8/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job9/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job10/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job11/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job12/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job13/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttlnu-1jet_newFxFx_v2/job14/cmsgrid_final.lhe"
+	],
+	"outpath" : "plots_ttlnu"
+}

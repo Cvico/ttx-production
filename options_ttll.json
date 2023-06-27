@@ -1,0 +1,11 @@
+{
+	"analysis" : "ttll",
+	"lhe-files" : [
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttll-1jet_oldFxFx/job0/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttll-1jet_oldFxFx/job1/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttll-1jet_oldFxFx/job2/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttll-1jet_oldFxFx/job3/cmsgrid_final.lhe",
+		"/beegfs/data/nanoAODv11/wz-run3/ttx-prod/ttll-1jet_oldFxFx/job4/cmsgrid_final.lhe"
+	],
+	"outpath" : "plots_ttll"
+}
