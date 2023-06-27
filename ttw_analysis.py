@@ -56,11 +56,12 @@ def analysis(reader):
     reader.plot( weights, abs(weights), (2, -1, 1), ("Weight", "Count"), "weights" ) # Use abs(weights) so no negative bins appear
 
     # ============= Jet pts ============= #
+    print(ak.max(jets.vector.pt[:, 0]))
     reader.plot( jets.vector.pt[:, 0], weights, (20, 0, ak.max(jets.vector.pt[:, 0])), (r"Leading jet $p_T$ [GeV]", "Count"), "jet1_pt" )
     reader.plot( jets.vector.pt[:, 1], weights, (20, 0, ak.max(jets.vector.pt[:, 1])), (r"Subleading jet $p_T$ [GeV]", "Count"), "jet2_pt" )
 
     # ============= mll ============= #
-    reader.plot( (leptons.vector[:, 0] + leptons.vector[:, 0]).mass, weights, (20, 0, 150), (r"Leading jet $p_T$ [GeV]", "Count"), "jet1_pt" )
+    reader.plot( (leptons.vector[:, 0] + leptons.vector[:, 0]).mass, weights, (20, 0, 150), (r"Leading jet $p_T$ [GeV]", "Count"), "mass" )
 
     return
 
