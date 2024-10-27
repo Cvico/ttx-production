@@ -1,15 +1,37 @@
-# ttx-production
-Configs and code to produce private LHE for Run3 ttX
+# Instrucciones para generar ttW
 
-# Generate pLHE from a gridpack
-With the following command:
+## Setup
+Ejecuta los siguientes comandos siempre que habras una nueva terminal.
 
-```python3 submit_plhe.py --nevents $NEVENTS --gridpack  $PATH_TO_GRIDPACK/gridpack_ttw.tar.xz --outpath $OUTPUT_PATH/ttlnu-1jet_newFxFx 352642 --mode slurm ```
+```
+/cvmfs/cms.cern.ch/cmsset_default.sh
+cmssw-cc7 -B /mnt_pool
+```
 
-That will create $NEVENTS/2000 folders in the output directory, each job will generate 2000 events itself. After producing the events the folder will be removed and we'll only keep the LHE. The fact that this produces batches of 2000 events is so far hardcoded.
+Esto lo que hace es activar una sesión de CentOS7 para poder trabajar siempre con el mismo sistema operativo.
+A continuación, hacemos el setup básico para cargar las librerias de CMS. La primera vez que ejecutes esto puede que tarde un poco. 
 
-# Plot stuff from LHE
-Need to write an "options" json as the one provided as example. Then you can run analyses as:
-```python3 ttw_analysis.py```
+```
+./environment.sh
+```
 
-That code in particular will plot some interesting distributions for ttlnu production for the particular case of same-sign dilepton events. 
+## Instalación de Madgraph5_aMC@NLO
+Este paso solo tienes que ejecutarlo una vez:
+
+```
+./installMG.sh
+```
+
+## Lanzar un gridpack
+Para lanzar un gridpack, asumiendo que tienes tus `cards` en la carpeta `cards/mi_proceso`, y esas cards tienen el siguiente formato de nombre: `mi_proceso_*.dat`, simplemente ejecuta:
+ 
+```
+./gridpack_generation.sh mi_proceso cards/mi_proceso
+```
+
+## Ejemplo: ttW
+```
+./gridpack_generation.sh TTLNu-1Jets_NLO_FXFX cards/ttW-TFG
+```
+
+Esto empezará a correr el código necesario para crear el gridpack de ttW que se desea.

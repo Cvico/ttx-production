@@ -9,7 +9,7 @@
 name=${1}
 carddir=${2}
 
-
+CMSSW_VERSION=CMSSW_13_0_2
 set_run_card_pdf () {
     name=$1
     CARDSDIR=$2
@@ -69,7 +69,7 @@ prepare_run_card () {
 
 make_gridpack () {
 	mainpath=`pwd`
-	MGSOURCE=/nfs/fanae/MadGraph.3.3.2/
+	MGSOURCE=$PWD/MG5_aMC_v3_5_4
 	CARDSDIR=$mainpath/$carddir
 
 	# 0. Few checks to ensure we have everything available
@@ -101,7 +101,7 @@ make_gridpack () {
 
 	# 2. Prepare utilities
 	#   2.1 LHAPDF
-	LHAPDFCONFIG=`echo "$MGSOURCE/bin/lhapdf-config"`
+	LHAPDFCONFIG="/cvmfs/cms.cern.ch/slc7_amd64_gcc11/external/lhapdf/6.4.0-e019996650b819a0fc60be6587a245af/bin/lhapdf-config"
 	LHAPDFINCLUDES=`$LHAPDFCONFIG --incdir`
 	LHAPDFLIBS=`$LHAPDFCONFIG --libdir`
 	export LHAPDF_DATA_PATH=`$LHAPDFCONFIG --datadir`  
@@ -116,35 +116,33 @@ make_gridpack () {
 
 	# 3. Generate events
 	#   3.1 Setup environment and compile card
-	source $MGSOURCE/configure.sh
-	mg5_aMC mgconfigscript
+	$MGSOURCE/bin/mg5_aMC mgconfigscript
 	
 	#   3.2. Compile the folder with the process card
 	cp $CARDSDIR/* .
-	mg5_aMC ${name}_proc_card.dat
+	$MGSOURCE/bin/mg5_aMC ${name}_proc_card.dat
 	
 	#   3.3. Copy the cards into the process folder
 	cd $name
-	cp ../${name}_madspin_card.dat Cards/madspin_card.dat
-	cp ../${name}_run_card.dat Cards/run_card.dat
-	cp ../${name}_param_card.dat Cards/param_card.dat
+	cp ${CARDSDIR}/${name}_madspin_card.dat Cards/madspin_card.dat
+	cp ${CARDSDIR}/${name}_run_card.dat Cards/run_card.dat
+	#cp ${CARDSDIR}/${name}_param_card.dat Cards/param_card.dat
 	
-	#   3.4. Few more configurations 
+	##   3.4. Few more configurations 
 	echo "shower=OFF" > makegrid.dat
 	echo "reweight=OFF" >> makegrid.dat
 	echo "done" >> makegrid.dat
 	echo "done" >> makegrid.dat
 	prepare_run_card $name $CARDSDIR $mainpath
 
-	
 	#   3.5. Launch the generation
-	cat makegrid.dat | ./bin/generate_events -n pilotrun
+	cat makegrid.dat | python3 ./bin/generate_events -n pilotrun
 	echo "finished pilot run"
-	
-	echo "mg5_path = $MGSOURCE/MG5_aMC" >> ./Cards/amcatnlo_configuration.txt
+
+	echo "mg5_path = $MGSOURCE" >> ./Cards/amcatnlo_configuration.txt
 	echo "cluster_temp_path = None" >> ./Cards/amcatnlo_configuration.txt
-	
-	# 4. Store output
+
+	## 4. Store output
 	cd ../
 	mkdir gridpack
 	mv $name gridpack/process
@@ -152,12 +150,12 @@ make_gridpack () {
 	cp $mainpath/utils/runcmsgrid.sh .
 	cp $mainpath/utils/merge.pl .
 	
-	# 5. Modify the output a bit
+	## 5. Modify the output a bit
 	pdfSysArgs=$(python3 ${maindir}/utils/getMG5_aMC_PDFInputs.py -f systematics -c run3 --is5FlavorScheme)
     sed -i s/PDF_SETS_REPLACE/${pdfSysArgs}/g runcmsgrid.sh
+    sed -i s/CMSSW_VERSION_REPLACE/${CMSSW_VERSION}/g runcmsgrid.sh
+    sed -i "s|__MGBASEDIR__|${MGSOURCE}|g" runcmsgrid.sh
     
-    # 6. Clean the gridpack
-    ${maindir}/utils/cleangridmore.sh
 	
 }
 
